@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2>Enregistrer une nouvelle image</h2>
+    <form [formGroup]="cropForm" (ngSubmit)="onSaveCrop()">
+      <div class="form-group">
+        <label for="title">Titre</label>
+        <input type="text" id="title" class="form-control" formControlName="title">
+      </div>
+      <div class="form-group fileUploaded">
+        <h4>Ajouter une photo</h4>
+        <input id="custom-input" type="file"  (change)="fileChangeListener($event)">
+        <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+      </div>
+      <br>
+      <span class="form-group result rounded " *ngIf="data.image">
+        <img [src]="data.image" id="imageCropped" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+      </span>
+      <span class="button">
+      <button class="btn btn-success" [disabled]="cropForm.invalid || fileIsUploading" type="submit">Enregistrer</button>
+    </span>
+    </form>
+  </div>
+</div>
